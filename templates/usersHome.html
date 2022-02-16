@@ -1,0 +1,54 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <h1 class="text-center">Welcome Super User!</h1>
+      <!-- <button type="button" id="add">-</button>
+    <button type="button" id="add">+</button> -->
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
+          </tr>
+          <tr>
+            <th scope="col">Email</th>
+            <td>COntact</td>
+            <td>Password</td>
+            <td>UserName</td>
+          </tr>
+        </thead>
+        <tbody id="bindUsersList">
+          <!-- <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td colspan="2">Larry the Bird</td>
+            <td>@twitter</td>
+          </tr> -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<script>
+  var bindUsersList = document.querySelector("#bindUsersList");
+
+  bindUsersList;
+  var tdData = "";
+
+  var localStorageDataItems = JSON.parse(localStorage.getItem("usersDataList"));
+
+  localStorageDataItems.forEach((element) => {
+    tdData += "<tr>";
+    tdData += "<th>" + element.email + "</th>";
+    tdData += "<td>" + element.contact + "</td>";
+    tdData += "<td>" + element.password + "</td>";
+    tdData += "<td>" + element.username + "</td></tr>";
+  });
+</script>
