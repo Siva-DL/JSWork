@@ -10,7 +10,7 @@ var userDetails = (async function () {
   document.querySelector("#mainItems").innerHTML = res;
   console.log(res);
 
-  document.querySelector("#LoginBtn").style.display = "none";
+  // document.querySelector("#LoginBtn").style.display = "none";
 
   document.querySelector("#Btn").onclick = async function () {
     var formElemnts = document.getElementsByClassName("form-control");
@@ -57,6 +57,27 @@ var userDetails = (async function () {
         let res = await fetchApi("../templates/usersHome.html");
         document.querySelector("#mainItems").innerHTML = res;
         console.log(res);
+
+        var bindUsersList = document.querySelector("#bindUsersList");
+
+        console.log(bindUsersList);
+
+        // bindUsersList;
+        var tdData = "";
+
+        var localStorageDataItems = JSON.parse(
+          localStorage.getItem("usersDataList")
+        );
+
+        localStorageDataItems.forEach((element) => {
+          tdData += "<tr>";
+          tdData += "<th>" + element.email + "</th>";
+          tdData += "<td>" + element.contact + "</td>";
+          tdData += "<td>" + element.password + "</td>";
+          tdData += "<td>" + element.username + "</td></tr>";
+        });
+
+        bindUsersList.innerHTML = tdData;
       }
     };
 

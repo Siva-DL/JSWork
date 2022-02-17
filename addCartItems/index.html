@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0px;
+        padding: 0px;
+      }
+      main {
+        height: 100vh;
+        background: url(./images/wave.svg) no-repeat bottom center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      #addSection {
+        /* width: 30%; */
+        border: 1px solid;
+        padding: 50px;
+        height: 100px;
+      }
+      .form-ele {
+        width: 100%;
+        margin-top: 10px;
+      }
+      .form-ele select,
+      input {
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div></div>
+      <section id="addSection">
+        <div class="form-ele">
+          <select name="vegitables" id="vegitables">
+            <option value="none">Choose Item</option>
+            <option value="onion">Onion</option>
+            <option value="tomato">Tomato</option>
+          </select>
+          <input type="number" value="0" id="cost" disabled />
+        </div>
+        <div class="form-ele">
+          <label for="itemQuantity">in Kgs</label>
+          <button type="button" id="add">+</button>
+          <input
+            type="text"
+            id="itemQuantity"
+            value="0"
+            name="itemQuantity"
+            disabled
+          />
+          <button type="button" id="del">-</button>
+        </div>
+      </section>
+    </main>
+    <script>
+      let q = 0;
+
+      let add = document.querySelector("#add");
+      let del = document.querySelector("#del");
+      let itemQuantity = document.querySelector("#itemQuantity");
+      let vegitables = document.querySelector("#vegitables");
+
+      add.onclick = () => {
+        let arr;
+        if (!JSON.parse(localStorage.getItem("cart"))) {
+          arr = [];
+        } else {
+          arr = JSON.parse(localStorage.getItem("cart"));
+        }
+
+        if (vegitables.value === "none") {
+          alert("please choose item");
+          return false;
+        }
+        // let num = q == 0 ? q++ : alert("wrong quantity");
+
+        // write a logic to validate the quantitiy for( 0 or < 0);
+        q++;
+        itemQuantity.value = q;
+        console.log(q);
+
+        arr.push({ itemName: vegitables.value, itemQuantity: q + "kg" });
+
+        addItesmCart(arr);
+      };
+
+      del.onclick = () => {
+        if (vegitables.value === "none") {
+          alert("please choose item");
+          return false;
+        }
+
+        q--;
+        itemQuantity.value = q;
+        console.log(q);
+      };
+
+      function addItesmCart(params) {
+        localStorage.setItem("cart", JSON.stringify(params));
+      }
+
+      // cost input supposed to not display initially
+      // cost input supposed to be display when user chooses the item.
+      // adding should increase the total sum of kgs - resuable funciton
+      // removing should decrease the total sum of kgs - resuable funciton
+    </script>
+  </body>
+</html>
